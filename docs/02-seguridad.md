@@ -21,3 +21,18 @@ Manejo de reglas mediante `firewalld` a nivel de SO y Security Lists a nivel de 
 * **Puertos Abiertos SO:** `<SSH_PORT_ORACLE>/tcp` (SSH). El servicio `ssh` estándar ha sido removido.
 * **SELinux:** Configurado para aceptar el puerto `<SSH_PORT_ORACLE>` bajo el contexto `ssh_port_t`.
 * **OCI Security List:** Ingress rule configurada para permitir tráfico TCP al puerto `<SSH_PORT_ORACLE>`.
+
+## Prevención de Intrusiones y Auditoría (Fail2ban & Auditd)
+
+Se implementa una arquitectura **Zero Trust** donde ambos nodos ejecutan monitoreo continuo de logs y llamadas al sistema.
+
+### Fail2ban
+* **Backend:** `systemd` (Journald) en ambos hosts.
+* **Arch Linux:** Umbral de 3 reintentos fallidos en un lapso de 10 minutos. Ban temporal de 2 horas.
+* **Oracle Linux:** Política agresiva para red pública. Umbral de 3 reintentos fallidos, provocando un Ban de 24 horas en `firewalld`.
+
+### Auditd (Kernel Auditing)
+Se han establecido reglas de auditoría para rastrear intentos de modificación en archivos de sistema críticos:
+* Cambios en `/etc/ssh/sshd_config` (Regla: `sshd_config`).
+* Alteraciones en cuentas de usuario y contraseñas (`/etc/passwd`, `/etc/shadow`).
+* Modificaciones de reglas en `firewalld` (Exclusivo en Oracle Linux).
