@@ -36,3 +36,10 @@ Se han establecido reglas de auditoría para rastrear intentos de modificación 
 * Cambios en `/etc/ssh/sshd_config` (Regla: `sshd_config`).
 * Alteraciones en cuentas de usuario y contraseñas (`/etc/passwd`, `/etc/shadow`).
 * Modificaciones de reglas en `firewalld` (Exclusivo en Oracle Linux).
+
+### Oracle Linux (Fail2ban & EPEL 10)
+Debido a la naturaleza de Enterprise Linux 10, la instalación requiere el repositorio EPEL:
+* **Paquetes:** `epel-release`, `fail2ban`, `fail2ban-firewalld`, `fail2ban-systemd`.
+* **Configuración modular:** `/etc/fail2ban/jail.d/sshd.local`.
+* **Acción de bloqueo:** `firewallcmd-rich-rules` (Integración nativa con `firewalld`).
+* **Regla:** 5 reintentos fallidos en 10 minutos generan un ban de 24 horas en `firewalld`.
