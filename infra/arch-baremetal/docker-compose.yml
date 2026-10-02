@@ -1,0 +1,75 @@
+services:
+  z-1:
+    image: itzg/minecraft-server:latest
+    tty: true
+    stdin_open: true
+    ports:
+      - "10.10.0.2:1024:25565/tcp"
+    environment:
+      EULA: "TRUE"
+      TYPE: "CURSEFORGE"
+      VERSION: "1.18.2"
+      MEMORY: "6144M"
+      MAX_PLAYERS: "10"
+      MOTD: "Adventure Of Echo Of The Legends"
+      USE_AIKAR_FLAGS: "true"
+      USE_MEOWICE_FLAGS: "true"
+    volumes:
+      - ./java-modpack-1/data:/data:Z
+
+
+  z-2:
+    image: itzg/minecraft-server:latest
+    tty: true
+    stdin_open: true
+    ports:
+      - "10.10.0.2:1025:25565/tcp"
+    environment:
+      EULA: "TRUE"
+      TYPE: "FORGE"
+      VERSION: "1.12.2"
+      MEMORY: "6144M"
+      MAX_PLAYERS: "10"
+      MOTD: "A divine Journey!!"
+      USE_AIKAR_FLAGS: "true"
+    volumes:
+      - "./java-modpack-2/data:/data:Z"
+
+
+  z-3:
+    image: itzg/minecraft-server:latest
+    tty: true
+    stdin_open: true
+    ports:
+      - "10.10.0.2:1026:25565/tcp"
+    environment:
+      EULA: "TRUE"
+      TYPE: "CURSEFORGE"
+      VERSION: "1.20.2"
+      MEMORY: "6144M"
+      MAX_PLAYERS: "10"
+      MOTD: "en proceso?"
+      USE_AIKAR_FLAGS: "true"
+      USE_MEOWICE_FLAGS: "true"
+    volumes:
+      - "./java-modpack-3/data:/data:Z"
+
+
+  x-1:
+    image: itzg/minecraft-bedrock-server:latest
+    environment:
+      EULA: "TRUE"
+      SERVER_NAME: "Bedrock mods?"
+      DIFFICULTY: "hard"
+      MAX_PLAYERS: "20"
+    ports:
+      - "10.10.0.2:1028:19132/udp"
+    volumes:
+      - "./bedrock-modpack/data:/data:Z"
+    stdin_open: true
+    tty: true
+
+
+
+
+
