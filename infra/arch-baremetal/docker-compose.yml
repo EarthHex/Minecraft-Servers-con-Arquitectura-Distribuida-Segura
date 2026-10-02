@@ -1,6 +1,6 @@
-services:
+kservices:
   z-1:
-    image: itzg/minecraft-server:latest
+    image: docker.io/itzg/minecraft-server:java17
     tty: true
     stdin_open: true
     ports:
@@ -8,6 +8,7 @@ services:
     environment:
       EULA: "TRUE"
       TYPE: "CURSEFORGE"
+      CF_SERVER_MOD: "/data/DawnCraft 2.0.16_hf Serverpack.zip"
       VERSION: "1.18.2"
       MEMORY: "6144M"
       MAX_PLAYERS: "10"
@@ -19,14 +20,15 @@ services:
 
 
   z-2:
-    image: itzg/minecraft-server:latest
+    image: docker.io/itzg/minecraft-server:java8
     tty: true
     stdin_open: true
     ports:
       - "10.10.0.2:1025:25565/tcp"
     environment:
       EULA: "TRUE"
-      TYPE: "FORGE"
+      TYPE: "CURSEFORGE"
+      CF_SERVER_MOD: "/data/Divine_Journey_2.23.4.zip"
       VERSION: "1.12.2"
       MEMORY: "6144M"
       MAX_PLAYERS: "10"
@@ -35,9 +37,9 @@ services:
     volumes:
       - "./java-modpack-2/data:/data:Z"
 
-
+# En fase de espera
   z-3:
-    image: itzg/minecraft-server:latest
+    image: docker.io/itzg/minecraft-server:java17
     tty: true
     stdin_open: true
     ports:
@@ -56,20 +58,16 @@ services:
 
 
   x-1:
-    image: itzg/minecraft-bedrock-server:latest
+    image: docker.io/itzg/minecraft-bedrock-server:latest
     environment:
       EULA: "TRUE"
       SERVER_NAME: "Bedrock mods?"
       DIFFICULTY: "hard"
       MAX_PLAYERS: "20"
+      ALLOW_LIST: "false"
     ports:
       - "10.10.0.2:1028:19132/udp"
     volumes:
       - "./bedrock-modpack/data:/data:Z"
     stdin_open: true
     tty: true
-
-
-
-
-
