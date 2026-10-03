@@ -1,3 +1,21 @@
-# Ignorar datos de los servidores Minecraft
-infra/arch-baremetal/*/data/
-infra/oracle-cloud/*/data/
+k# Datos generados por Minecraft
+java-modpack-1/data/
+java-modpack-2/data/
+java-modpack-3/data/
+bedrock-modpack/data/
+
+# Logs y backups
+**/logs/
+**/backups/
+*.log
+
+# Archivos locales y secretos
+.env
+*.secret
+*.key
+*.pem
+
+# Archivos temporales
+.DS_Store
+.idea/
+
