@@ -1,4 +1,4 @@
-k# Arch Linux Bare Metal: nodo de cómputo
+# Arch Linux Bare Metal: nodo de cómputo
 
 ## Propósito
 
